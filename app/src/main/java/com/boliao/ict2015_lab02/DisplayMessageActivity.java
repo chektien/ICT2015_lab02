@@ -15,6 +15,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private int onRestartCount = 0;
     private int onStartCount = 0;
     private int onResumeCount = 0;
+    private int onPauseCount = 0;
+    private int onDestroyCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +45,38 @@ public class DisplayMessageActivity extends AppCompatActivity {
         });
     }
 
+    @Override
     public void onStart() {
         super.onStart();
         Log.i(TAG, "Entered onStart() " + ++onStartCount + " times.");
     }
+
+    @Override
     public void onRestart() {
         super.onRestart();
         Log.i(TAG, "Entered onRestart() " + ++onRestartCount + " times.");
     }
+
+    @Override
     public void onResume() {
         super.onResume();
         Log.i(TAG, "Entered onResume() " + ++onResumeCount + " times.");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG, "Entered onPause() " + ++onPauseCount + " times.");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "Entered onDestroy() " + ++onDestroyCount + " times.");
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+
     }
 }

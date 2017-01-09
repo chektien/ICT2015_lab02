@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+/**
+ * see https://developer.android.com/guide/components/activities/activity-lifecycle.html for
+ * lifecycle diagram
+ */
 public class MainActivity extends AppCompatActivity {
     public final static String TAG = "MainActivity";
     public final static String EXTRA_MESSAGE = "com.boliao.ictlab.EXTRA";
@@ -16,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
     private int onRestartCount = 0;
     private int onStartCount = 0;
     private int onResumeCount = 0;
-
+    private int onPauseCount = 0;
+    private int onDestroyCount = 0;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,16 +39,33 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
     public void onStart() {
         super.onStart();
         Log.i(TAG, "Entered onStart() " + ++onStartCount + " times.");
     }
+
+    @Override
     public void onRestart() {
         super.onRestart();
         Log.i(TAG, "Entered onRestart() " + ++onRestartCount + " times.");
     }
+
+    @Override
     public void onResume() {
         super.onResume();
         Log.i(TAG, "Entered onResume() " + ++onResumeCount + " times.");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.i(TAG, "Entered onPause() " + ++onPauseCount + " times.");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "Entered onDestroy() " + ++onDestroyCount + " times.");
     }
 }
