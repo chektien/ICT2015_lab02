@@ -16,4 +16,13 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/button_close"/>
+
+    <Button
+        android:text="Email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/button_close"
+        android:layout_marginBottom="64dp"
+        android:id="@+id/button_email" />
 </RelativeLayout>

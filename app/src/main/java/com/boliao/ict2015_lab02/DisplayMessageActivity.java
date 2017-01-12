@@ -11,6 +11,14 @@ import android.widget.TextView;
 
 public class DisplayMessageActivity extends AppCompatActivity {
     public static final String TAG = "DisplayMessageActivity";
+    public static final String ONCREATE_COUNT = "onCreateCount";
+    public static final String ONSTART_COUNT = "onStartCount";
+    public static final String ONRESTART_COUNT = "onRestart";
+    public static final String ONRESUME_COUNT = "onResumeCount";
+    public static final String ONPAUSE_COUNT = "onPauseCount";
+    public static final String ONDESTROY_COUNT = "onDestroyCount";
+
+
     private int onCreateCount = 0;
     private int onRestartCount = 0;
     private int onStartCount = 0;
@@ -21,7 +29,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "Entered onCreate() " + ++onCreateCount + " times.");
 
         setContentView(R.layout.activity_display_message);
 
@@ -43,6 +50,29 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        // recover the data from saved bundle
+        if (savedInstanceState != null) {
+            onCreateCount = savedInstanceState.getInt(ONCREATE_COUNT);
+            onStartCount = savedInstanceState.getInt(ONSTART_COUNT);
+            onRestartCount = savedInstanceState.getInt(ONRESTART_COUNT);
+            onResumeCount = savedInstanceState.getInt(ONRESUME_COUNT);
+            onPauseCount = savedInstanceState.getInt(ONPAUSE_COUNT);
+            onDestroyCount = savedInstanceState.getInt(ONDESTROY_COUNT);
+
+            Log.i(TAG, "Recovered onCreateCount="+onCreateCount+" onStartCount="+onStartCount+" onRestartCount="+onRestartCount+" onResumeCount="+onResumeCount+" onPauseCount="+onPauseCount+" onDestroyCount="+onDestroyCount);
+        }
+
+        Log.i(TAG, "Entered onCreate() " + ++onCreateCount + " times.");
+
+        // email button
+//        Button buttonEmail = (Button) findViewById(R.id.button_email);
+//        buttonEmail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(Intent.ACTION_SEND));
+//            }
+//        });
     }
 
     @Override
@@ -77,6 +107,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-
+        savedInstanceState.putInt(ONCREATE_COUNT, onCreateCount);
+        savedInstanceState.putInt(ONSTART_COUNT, onStartCount);
+        savedInstanceState.putInt(ONRESTART_COUNT, onRestartCount);
+        savedInstanceState.putInt(ONRESUME_COUNT, onResumeCount);
+        savedInstanceState.putInt(ONPAUSE_COUNT, onPauseCount);
+        savedInstanceState.putInt(ONDESTROY_COUNT, onDestroyCount);
+        super.onSaveInstanceState(savedInstanceState);
     }
 }
